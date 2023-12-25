@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError, ListNode } = require('../extensions/index.js');
 
 // const { ListNode } = require('../extensions/list-node.js');
 
@@ -22,11 +22,64 @@ const { NotImplementedError } = require('../extensions/index.js');
  *   }
  * }
  */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function removeKFromList(l, k) {
+  let head = l;
+  let prev = null;
+  let current = head;
+  while(current != null){
+   // console.log(current.value);
+    if(current.value === k){
+      //for removing first element
+      if(prev === null){
+        head = current.next
+        } 
+      else
+        prev.next = current.next  //remove current node
+    }
+    else{
+      prev = current;
+    }
+    current = current.next; //go to next node
+    
+  }
+  return head
 }
 
 module.exports = {
   removeKFromList
 };
+
+
+//------
+
+function convertArrayToList(arr) {
+  return arr.reverse().reduce((acc, cur) => {
+    if (acc) {
+      const node = new ListNode(cur);
+      node.next = acc;
+      return node;
+    }
+
+    return new ListNode(cur);
+  }, null);
+}
+
+function printLinkedList(list){
+  let head = list;
+  let current = head;
+  let arr = []
+  while(current != null){
+    arr.push(current.value)
+    current = current.next;
+  }
+  console.log(arr);
+}
+
+
+// let l  = convertArrayToList([1,1,2,3,4,5,6,7])
+// printLinkedList(l)
+
+// printLinkedList(removeKFromList(l, 1))
+
+
+
